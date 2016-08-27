@@ -1,5 +1,5 @@
 # learnAngularjs2
-angularjs2(基于rc4)的学习历程
+我的angularjs2(基于rc4)学习历程，不定期更新～～～
 ##目录
 ##1 . 快速构建一个angularjs2项目
 ###安装 typescript 和 typings
