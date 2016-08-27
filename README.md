@@ -1,7 +1,7 @@
-# learnAngularjs2
-angularjs2(基于rc4)的学习历程
+# learnAngularJs2
+AngularJs2(基于rc4)的学习历程
 ##目录
-1. ##快速构建一个angularjs2项目
+##1 . 快速构建一个AngularJs2项目
 ###安装 typescript 和 typings
 ``npm install -g typescript typings``  
 
@@ -9,7 +9,7 @@ angularjs2(基于rc4)的学习历程
 
 ###安装 angular-cli 
 ``npm install -g angular-cli``  
-angularjs2的配置较为繁杂,安装angular-cli可以帮助我们快速的构建angularjs2项目
+AngularJs2的配置较为繁杂,安装angular-cli可以帮助我们快速的构建AngularJs2项目
 ####常用 angular-cli 命令
 * ng new project-name - 创建一个新项目，置为默认设置
 * ng generate directive my-directive - 生成一个新指令
@@ -22,7 +22,7 @@ angularjs2的配置较为繁杂,安装angular-cli可以帮助我们快速的构�
 * ng e2e - 运行端到端（end-to-end）测试
 * ng serve - 启动一个小型web服务器，用于托管应用
 * ng deploy - 即开即用，部署到Github Pages或者Firebase
-###使用 angular-cli 新建一个 angularjs2 项目
+###使用 angular-cli 新建一个 AngularJs2 项目
 ``ng new hello-world``
 在命令行内执行该命令既会新建一个名为hello-world的项目
 ###使用 angular-cli 启动简易服务器来测试项目
@@ -65,7 +65,7 @@ export class AppComponent {
 * node_modules/ - 依赖模块
 * public/ - 公共资源，如js、css等
 * src/ - **实际编写项目的目录**
-* src/index.html - angularjs2的入口页面，同时该页面内会引入各个依赖，并引入angularjs2的入口函数bootstrap所在的文件
+* src/index.html - AngularJs2的入口页面，同时该页面内会引入各个依赖，并引入AngularJs2的入口函数bootstrap所在的文件
 * src/main.ts - 项目生成后默认的执行bootstrap函数的ts文件
 * src/system-config - 项目生成后默认的存放声明依赖的ts文件
 * src/tsconfig.json - typescript的配置文件
