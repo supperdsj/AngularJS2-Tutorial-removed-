@@ -58,7 +58,7 @@ export class AppComponent {
 <p>this is my first app</p>
 ```
 再次打开[http://localhost:4200](http://localhost:4200)进行访问，可看到我们的页面内容已经修改为对应的内容。
-###angular-cli构建项目各目录的用途（欢迎补充和指正）
+###angular-cli构建项目各目录的用途
 * config/ - 各种项目配置和环境变量
 * dist/ - 项目编译后的文件
 * e2e/ - 测试实例
