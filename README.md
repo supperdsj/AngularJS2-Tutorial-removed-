@@ -1,8 +1,11 @@
 #AngularJs2 Tutorial
 AngularJs2(基于rc4)教程 , 欢迎反馈错误和补充内容。
+
 ##目录
 * [1.快速构建一个AngularJs2项目](#1.快速构建一个AngularJs2项目)
-* [2.Component](#2.Component)   
+* [2.Component](#2.Component)  
+ 
+---
 ##1.快速构建一个AngularJs2项目
 ###安装 typescript 和 typings
 ``npm install -g typescript typings``  
