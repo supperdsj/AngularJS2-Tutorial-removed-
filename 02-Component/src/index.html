@@ -14,6 +14,14 @@
 <body>
   <app-root>Loading...</app-root>
   <app-new-component></app-new-component>
+
+  <p>selector:</p>
+
+  <app-selector>app-selector</app-selector>
+  <div class="app-selector">.app-selector</div>
+  <div id="app-selector1">#app-selector</div>
+  <div app-selector>[app-selector]</div>
+
     {{#each scripts.polyfills}}
     <script src="{{.}}"></script>
     {{/each}}

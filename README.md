@@ -1,4 +1,4 @@
-#AngularJs2 Tutorial
+#AngularJS 2 Tutorial
 AngularJs2(基于rc4)教程 , 欢迎反馈错误和补充内容。
 
 ##目录
@@ -180,7 +180,25 @@ export class NewComponentComponent implements OnInit {
 ```
 再次打开[http://localhost:4200](http://localhost:4200)进行访问，可以看到 newComponent 内已经成功嵌套了 childComponent。
 
+*因 angular-cli 在生成 Component 时会默认为文件名和导出的模块自动添加相关后缀 ，故之后新建的 Component 不再为 Component 添加冗余后缀*
 ###Component 的 selector
+Component 可以自定义选择器来针对不同的指令进行应用，修改 Component 主文件内 selector 属性的内容即可。我们先新建一个名为 selector 的 Component ， 并将其引用到 main.ts 中 , 再在 index.html 内添加如下指令：
+```
+<app-selector>app-selector</app-selector>
+  <div class="app-selector">.app-selector</div>
+  <div id="app-selector1">#app-selector</div>
+  <div app-selector>[app-selector]</div>
+```
+然后修改 selector 主文件内的 selector 属性依次如下：
+*  app-selector - 标签选择器
+*  .app-selector - 类选择器
+*  #app-selector - id选择器
+*  [app-selector] - 属性选择器
+
+如需应用多个选择器来指定指令，用","将选择器间进行分隔即可，如：app-selector,#app-selector,.app-selector。此时网页内只有第一个标签应用 Component 成功。
+将同样的指令应用到 newComponent 中，我们发现除 #app-selector 以外的指令均应用成功。
+
+**在 AngularJS 2 RC 4 中，html 内不能重复应用同一 Component ， Component的 id 选择器与标签选择器或类选择器不能同时应用。**
 ###Component 的 template
 ###Component 的 style
 

@@ -40,6 +40,8 @@ const barrels: string[] = [
   'app/other1',
   'app/new-component',
   'app/child-component',
+  'app/selector-component',
+  'app/selector',
   /** @cli-barrel */
 ];
 
