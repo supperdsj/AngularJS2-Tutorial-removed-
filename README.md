@@ -2,8 +2,8 @@
 AngularJs2(基于rc4)教程 , 欢迎反馈错误和补充内容。
 
 ##目录
-* [1.快速构建一个AngularJs2项目](#1--快速构建一个AngularJs2项目)
-* [2.Component](#2--Component基础)  
+* [1.快速构建一个AngularJs2项目](#1快速构建一个angularjs2项目)
+* [2.Component](#2--component-基础)  
  
 ---
 ##1.快速构建一个AngularJs2项目
