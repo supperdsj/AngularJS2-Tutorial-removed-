@@ -12,24 +12,26 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root>Loading...</app-root>
-  <app-new-component></app-new-component>
+<app-root>Loading...</app-root>
+<app-new-component></app-new-component>
 
-  <p>selector:</p>
+<p>selector:</p>
 
-  <app-selector>app-selector</app-selector>
-  <div class="app-selector">.app-selector</div>
-  <div id="app-selector1">#app-selector</div>
-  <div app-selector>[app-selector]</div>
-
-    {{#each scripts.polyfills}}
-    <script src="{{.}}"></script>
-    {{/each}}
-    <script>
-      System.import('system-config.js').then(function () {
-        System.import('main');
-      }).catch(console.error.bind(console));
-    </script>
+<app-selector>app-selector</app-selector>
+<div class="app-selector">.app-selector</div>
+<div id="app-selector1">#app-selector</div>
+<div app-selector>[app-selector]</div>
+<app-inline-template></app-inline-template>
+<app-inline-style></app-inline-style>
+<app-ng-content>hello ng-content</app-ng-content>
+{{#each scripts.polyfills}}
+<script src="{{.}}"></script>
+{{/each}}
+<script>
+  System.import('system-config.js').then(function () {
+    System.import('main');
+  }).catch(console.error.bind(console));
+</script>
 
 </body>
 </html>

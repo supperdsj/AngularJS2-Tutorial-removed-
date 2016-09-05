@@ -2,8 +2,8 @@
 AngularJs2(基于rc4)教程 , 欢迎反馈错误和补充内容。
 
 ##目录
-* [1.快速构建一个AngularJs2项目](#1.快速构建一个AngularJs2项目)
-* [2.Component](#2.Component)  
+* [1.快速构建一个AngularJs2项目](#1--快速构建一个AngularJs2项目)
+* [2.Component](#2--Component基础)  
  
 ---
 ##1.快速构建一个AngularJs2项目
@@ -82,7 +82,7 @@ export class AppComponent {
 * typings/ - typescript，src/typings.d.ts相关的typings
 * angular-cli.json - angular-cli的配置文件，该文件内可对angular-cli进行一些配置，如defaults.prefix课修改后默认生成的前缀
 
-## 2 . Component
+## 2 . Component 基础
 ###什么是 Component ?
 Component 是 AngularJs2 中构建元素和逻辑的主要手段,我们可以利用 Component 来实现 AngularJs 内 Directive ＋ Controller ＋ Scope的功能，即自定义指令。
 
@@ -164,15 +164,6 @@ import {ChildComponentComponent} from '../child-component'
   styleUrls: ['new-component.component.css'],
   directives: [ChildComponentComponent]
 })
-export class NewComponentComponent implements OnInit {
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
-}
 ```
 最后再在 newComponent 的模板文件 new-component.html内添加 newComponent 的指令 app-child-component , 添加代码如下: 
 ```
@@ -198,7 +189,118 @@ Component 可以自定义选择器来针对不同的指令进行应用，修改 
 如需应用多个选择器来指定指令，用","将选择器间进行分隔即可，如：app-selector,#app-selector,.app-selector。此时网页内只有第一个标签应用 Component 成功。
 将同样的指令应用到 newComponent 中，我们发现除 #app-selector 以外的指令均应用成功。
 
-**在 AngularJS 2 RC 4 中，html 内不能重复应用同一 Component ， Component的 id 选择器与标签选择器或类选择器不能同时应用。**
+**在 AngularJS 2 RC 4 中，不能重复应用同一 root Component ， Component 的 id 选择器与标签选择器或类选择器不能同时应用。**
 ###Component 的 template
+Component 可以通过在 Component 主文件内 templateUrl 或 template 属性来定义模板 。 如使用 templateUrl 属性则 Component 会寻找对应的文件来加载模板 ; 如使用 template 属性则 Component 会在主文件内根据该属性的字段来加载模板。 
+angular-cli 默认使用 templateUrl 来定义模板 , 现在我们使用 angular-cli 来新建一个名为 inlineTemplate 的 Component , 并使用 template 来定义模板。执行命令:
+```
+ng generate component inlineTemplate --inline-template // 可简写为 ng g c inlineTemplate --it
+```
+对比之前 Component 的文件结构我们可以发现 , 添加 --inline-template 参数后 , angular-cli 并没有生成 Component 的模板文件 , 然后我们打开 Component 的主文件 inline-template.component.ts , 可以看到如下代码:
+```
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-inline-template',
+  template: `
+    <p>
+      inline-template Works!
+    </p>
+  `,
+  styleUrls: ['inline-template.component.css']
+})
+```
+我们可以看到 , angular-cli 已经为我们添加了 template 属性 , 并在该属性内写了一段 html 的 demo。
 ###Component 的 style
+Component 可以通过在 Component 主文件内 styleUrls 或 styles 属性来定义CSS样式 。 如使用 styleUrls 属性则 Component 会寻找对应的文件来应用CSS样式 ; 如使用 template 属性则 styles 会在主文件内根据该属性的字段来应用CSS样式。 
+angular-cli 默认使用 styleUrls 来定义CSS样式 , 现在我们使用 angular-cli 来新建一个名为 inlineStyle 的 Component , 并使用 styleUrls 来定义CSS样式。执行命令:
+```
+ng generate component inlineStyle --inline-style // 可简写为 ng g c inlineStyle --is
+```
+对比之前 Component 的文件结构我们可以发现 , 添加 --inline-style 参数后 , angular-cli 并没有生成 Component 的样式文件 , 然后我们打开 Component 的主文件 inline-style.component.ts , 可以看到如下代码:
+```
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-inline-style',
+  templateUrl: 'inline-style.component.html',
+  styles: []
+})
+```
+我们可以看到 , angular-cli 已经为我们添加了 styles 属性 , 但现在该属性内的样式并为定义 , 接下来我们在该属性中添加一段 CSS 样式 , 将 templateUrl 修改为 template , 并将 child-component 加载到此 Component 中 , 最终 Component 代码如下:
+```
+import {Component, OnInit} from '@angular/core';
+import {ChildComponentComponent} from '../child-component';
+@Component({
+  moduleId: module.id,
+  selector: 'app-inline-style',
+  template: `
+  <h1> My name is inline-style! </h1>    
+  <p>
+    inline-style works! <br>
+    <app-child-component></app-child-component>
+  </p>
+    `,
+  styles: [`
+    p {
+        color: red;
+    }
+    `],
+  directives: [ChildComponentComponent]
+})
+```
+查看页面后我们可以发现 , 虽然我们在 Component 中以 p 作为 CSS 样式的选择器 , 但只有 app-inline-style 下的 p 标签的样式受到了影响 , 与其他 Component 的 p 标签的样式相隔离。我们打开 chrome 的开发者工具可以看到如下 html 代码:
+```
+<app-inline-style _nghost-fqi-1="">
+  <h1 _ngcontent-fqi-1=""> My name is inline-style! </h1>
+  <p _ngcontent-fqi-1="">
+    inline-style works! <br _ngcontent-fqi-1="">
+    <app-child-component _ngcontent-fqi-1="" _nghost-fqi-2="">
+    <p _ngcontent-fqi-2="">
+        child-component works!
+    </p>
+    </app-child-component>
+  </p>
+</app-inline-style>
+```
+我们可以发现 , AngularJS2 为每一个 Component 都添加了随机的属性 , 然后我们查看 p 标签的 CSS 样式 , 每个 p 标签也被添加了对应的属性选择器 , 结果就实现了 CSS 样式的 Component 隔离。
+###利用 ng-content 在 Component 内显示内容
+Component 会默认将对应指令内的全部内容替换为模板内的内容 , 如果我们需要保留指令内的内容则需要使用 ng-content 在模板内指定内容出现的位置 , 我们新建一个名为 ngContent 的 Component 来进行演示:
+```
+@Component({
+  moduleId: module.id,
+  selector: 'app-ng-content',
+  template: `
+    <p>
+      ng-content Works!
+    </p>
+    <ng-content></ng-content>
+  `,
+  styles: []
+})
+```
+然后将该 Component 加载到 new-component 内:
+```
+<app-ng-content>there is ng-content</app-ng-content>
+```
+页面上会出现如下 html 代码:
+```
+<app-ng-content _ngcontent-buv-1="">
+    <p>
+      ng-content Works!
+    </p>
+    there is ng-content
+  </app-ng-content>
+```
+但是在 index.html 内用同样的方法则只出现了如下 html 代码:
+```
+<app-ng-content>
+    <p>
+      ng-content Works!
+    </p>
+</app-ng-content>
+```
+**在 Angular 2 RC 4 暂时还不支持 root Component 内使用 ng-content 加载数据。**
 

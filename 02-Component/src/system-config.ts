@@ -42,6 +42,9 @@ const barrels: string[] = [
   'app/child-component',
   'app/selector-component',
   'app/selector',
+  'app/inline-template',
+  'app/inline-style',
+  'app/ng-content',
   /** @cli-barrel */
 ];
 
