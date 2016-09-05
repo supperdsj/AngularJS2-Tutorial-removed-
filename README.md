@@ -2,8 +2,8 @@
 AngularJs2(基于rc4)教程 , 欢迎反馈错误和补充内容。
 
 ##目录
-* [1.快速构建一个AngularJs2项目](#1快速构建一个angularjs2项目)
-* [2.Component](#2--component-基础)  
+* [1.快速构建一个AngularJs2项目](#1.快速构建一个angularjs2项目)
+* [2.Component 基础](#2.Component-基础)  
  
 ---
 ##1.快速构建一个AngularJs2项目
@@ -82,7 +82,7 @@ export class AppComponent {
 * typings/ - typescript，src/typings.d.ts相关的typings
 * angular-cli.json - angular-cli的配置文件，该文件内可对angular-cli进行一些配置，如defaults.prefix课修改后默认生成的前缀
 
-## 2 . Component 基础
+##2.Component 基础
 ###什么是 Component ?
 Component 是 AngularJs2 中构建元素和逻辑的主要手段,我们可以利用 Component 来实现 AngularJs 内 Directive ＋ Controller ＋ Scope的功能，即自定义指令。
 
