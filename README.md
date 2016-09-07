@@ -304,3 +304,10 @@ Component 会默认将对应指令内的全部内容替换为模板内的内容 
 ```
 **在 Angular 2 RC 4 暂时还不支持 root Component 内使用 ng-content 加载数据。**
 
+##3.为 Component 绑定数据和事件
+###字符串插值
+###属性绑定
+###事件绑定
+###双向绑定
+###Component 的 Lifecycle Hook
+
