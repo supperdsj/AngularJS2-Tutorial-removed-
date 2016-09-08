@@ -17,7 +17,6 @@ export class AppComponent {
   constructor() {
     setInterval(() => {
       this.timer++;
-      console.log(this.timer);
     }, 1000)
   }
 }

@@ -14,8 +14,10 @@ import {Component, OnInit, Input} from '@angular/core';
 export class ComponentPropertyBindingComponent implements OnInit {
   @Input() componentProperty: number = 0;
   constructor() {
+    setInterval(() => {
+      console.log(this.componentProperty);
+    }, 1000)
   }
-
   ngOnInit() {
   }
 
