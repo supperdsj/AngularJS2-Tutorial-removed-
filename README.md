@@ -306,7 +306,197 @@ Component 会默认将对应指令内的全部内容替换为模板内的内容 
 
 ##3.为 Component 绑定数据和事件
 ###字符串插值
+AngularJs2 可以使用简单的字符串插值方法将 Component 中的变量值输出到模板的任何位置 , 只需在所需位置使用 {{ }} 来包住需要显示的变量名即可下面就是一个简单的例子：
+```
+import {Component, OnInit} from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-data-binding',
+  template: `
+    <p>
+        data-binding Works!
+    </p>
+    <p>
+        stringInterpolation:{{stringInterpolation}}
+    </p>
+  `,
+  styles: []
+})
+export class DataBindingComponent implements OnInit {
+  
+  stringInterpolation = 'There is string interpolation';
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+}
+```
+**注意：字符串插值是一种单向绑定，只会将 Component 中的变量值插入到模板中，不会将模板中对应位置的变化反馈回 Component 中的变量**
 ###属性绑定
+####使用字符串插值实现属性绑定
+字符串插值可将 Component 中的变量值插入到模板的任何位置 ，如果我们需要将某个变量绑定到 html 标签的某个属性，也可以使用字符串插值的方法来实现。下面就是一个简单的例子：
+```
+import {Component, OnInit} from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-property-binding',
+  template: `
+    <h2>
+        property-binding Works!
+    </h2>
+    <p>
+        inputValue:{{inputValue}}
+    </p>
+    Use double braces:<input type="text" id="input1" value="{{inputValue}}">
+  `,
+  styles: []
+})
+export class PropertyBindingComponent implements OnInit {
+  inputValue = 'inputValue';
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+}
+```
+####使用[]实现属性绑定
+AngularJS2 可以使用 [] 来为指定的 html 属性绑定 Component 中的变量，只需使用[]包住需要绑定的 html 属性，然后将 Component 的变量作为属性值即可。下面就是一个简单的例子：
+```
+import {Component, OnInit} from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-property-binding',
+  template: `
+    <h2>
+        property-binding Works!
+    </h2>
+    <p>
+        inputValue:{{inputValue}}
+    </p>
+    Use double braces:<input type="text" id="input1" value="{{inputValue}}"> <br>
+    Use middle bracket:<input type="text" id="input2" [value]="inputValue"> <br>
+  `,
+  styles: []
+})
+export class PropertyBindingComponent implements OnInit {
+  inputValue = 'inputValue';
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+}
+```
+同字符串插值一样，[]实现的属性绑定也是单向绑定。
+####ngClass
+AngularJS2如需根据 Component 的变量改变 class ，可以使用字符串插值或[]实现 ，但当需被逻辑控制的 class 较多时，就需要为每一个 class 都书写一个三目表达式或使用函数来返回函数，此时就可以使用 AngularJS2 提供的 html 属性 ngClass。下面是一个简单的例子：
+```
+import {Component, OnInit} from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-ng-class',
+  template: `
+    <h2>
+      ng-class Works!
+    </h2>
+    <p [ngClass]="{redColor:true,redBorder:true,redBackground:false}">
+        ngClass demo
+    </p>
+  `,
+  styles: [`
+    .redColor{
+        color: red;
+    }
+    .redBorder{
+        border:1px solid red;
+    }
+    .redBackground{
+        background-color: red;
+    }
+  `]
+})
+export class NgClassComponent implements OnInit {
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+
+}
+```
+####ngStyle
+AngularJS2 也提供了 NgStyle 用来根据 Component 的变量来改变 html 标签的 style。下面是一个简单的例子：
+```
+import {Component, OnInit} from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-ng-style',
+  template: `
+    <h2>
+      ng-style Works!
+    </h2>
+    <p [ngStyle]="{'color':color1,'border':color1+' solid 1px'}">color1</p>
+    <p [ngStyle]="{'color':color2,'border':color2+' solid 1px'}">color2</p>
+    <p [ngStyle]="{'color':color3,'border':color3+' solid 1px'}">color3</p>
+  `,
+  styles: []
+})
+export class NgStyleComponent implements OnInit {
+  color1 = 'red';
+  color2 = 'green';
+  color3 = 'blue';
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+
+}
+```
+####Component 指令的属性绑定
+Component 指令的属性也可以进行属性绑定，并通可在当前 Component 内进行使用。使用时需要引用AngularJS2 提供的 Input 修饰符，并使用 @Input 修饰变量，即可将该变量作为 Component 指令的属性。下面是一个简单的例子：
+```
+import {Component, OnInit, Input} from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-component-property-binding',
+  template: `
+    <h2>
+      component-property-binding Works!
+    </h2>
+    <p>{{componentProperty}}</p>
+  `,
+  styles: []
+})
+export class ComponentPropertyBindingComponent implements OnInit {
+  @Input() componentProperty: number = 0;
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+
+}
+
+```
+然后该 Component 的指令就可以将 component-property 作为属性使用：
+```
+<app-component-property-binding [component-porperty]="timer"></app-component-property-binding>
+```
+然后我们再使用 setInterval 不停改变属性 component-porperty 绑定的值 timer ，会发现 Component 内的变量 componentPorperty 不会随着 timer 的改变而改变，即 Component 的指令绑定为值传递。
 ###事件绑定
 ###双向绑定
 ###Component 的 Lifecycle Hook
