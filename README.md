@@ -58,7 +58,7 @@ export class AppComponent {
   {{title}}
 </h1>
 ```
-此时绑定变量和angular的预防相同，现在我们再在模板内随意添加一些内容，如：
+此时绑定变量和 AngularJS 的方法相同，现在我们再在模板内随意添加一些内容，如：
 ```
 <h1>
   {{title}}
@@ -496,8 +496,137 @@ export class ComponentPropertyBindingComponent implements OnInit {
 ```
 <app-component-property-binding [component-porperty]="timer"></app-component-property-binding>
 ```
-然后我们再使用 setInterval 不停改变属性 component-porperty 绑定的值 timer ，会发现 Component 内的变量 componentPorperty 不会随着 timer 的改变而改变，即 Component 的指令绑定为值传递。
+我们使用 setInterval 不停改变属性 component-porperty 绑定的值 timer ，会发现 Component 内的变量 componentPorperty 不会随着 timer 的改变而改变，即 Component 的指令绑定为值传递。
+```
+export class AppComponent {
+  title = 'app works!';
+  timer = 0;
+  constructor() {
+    setInterval(() => {
+      this.timer++;
+    }, 1000)
+  }
+}
+```
 ###事件绑定
+####使用()实现事件绑定
+AngularJS2 可以使用 () 来为指定的 html 事件绑定 Component 中的函数，只需使用 () 包住需要绑定的 html 的事件，然后将 Component 的函数作为属性值即可。下面就是一个简单的例子：
+```
+import {Component, OnInit} from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-event-binding',
+  template: `
+    <h2>
+      event-binding Works!
+    </h2>
+    <p (click)="clickEvent()" (dblclick)="dblclickEvent()" (mouseenter)="mouseenterEvent()" (mouseleave)="mouseleaveEvent()"> {{mouseEvent}} </p>
+  `,
+  styles: []
+})
+export class EventBindingComponent implements OnInit {
+
+  mouseEvent = 'mouse events ~';
+
+  clickEvent() {
+    this.mouseEvent = 'clickEvent';
+  };
+
+  dblclickEvent() {
+    this.mouseEvent = 'dblclickEvent';
+  }
+
+  mouseenterEvent() {
+    this.mouseEvent = 'mouseenterEvent';
+  }
+
+  mouseleaveEvent() {
+    this.mouseEvent = 'mouseleaveEvent';
+  }
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+
+}
+
+```
+AngularJS 2 提供了以下可以进行绑定的事件：
+* 鼠标
+        'click',
+        'mouseup',
+        'mousedown',
+        'dblclick',
+        'contextmenu',
+        'mouseenter',
+        'mouseleave',
+        'mousemove',
+        'mouseout',
+        'mouseover',
+        'show'
+* 按键
+        'keydown',
+        'keypress',
+        'keyup'
+* 目标
+        'input',
+        'change',
+        'blur'
+* transitionend
+        'transitionend'
+* 其他
+         'abort',
+         'afterprint',
+         'beforeprint',
+         'cached',
+         'canplay',
+         'canplaythrough',
+         'chargingchange',
+         'chargingtimechange',
+         'close',
+         'dischargingtimechange',
+         'DOMContentLoaded',
+         'downloading',
+         'durationchange',
+         'emptied',
+         'ended',
+         'error',
+         'fullscreenchange',
+         'fullscreenerror',
+         'invalid',
+         'languagechange',
+         'levelfchange',
+         'loadeddata',
+         'loadedmetadata',
+         'obsolete',
+         'offline',
+         'online',
+         'open',
+         'orientatoinchange',
+         'pause',
+         'pointerlockchange',
+         'pointerlockerror',
+         'play',
+         'playing',
+         'ratechange',
+         'readystatechange',
+         'reset',
+         'scroll',
+         'seeked',
+         'seeking',
+         'stalled',
+         'submit',
+         'success',
+         'suspend',
+         'timeupdate',
+         'updateready',
+         'visibilitychange',
+         'volumechange',
+         'waiting'
+####Component 指令的事件绑定
 ###双向绑定
 ###Component 的 Lifecycle Hook
 

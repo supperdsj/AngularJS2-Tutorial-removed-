@@ -42,6 +42,7 @@ const barrels: string[] = [
   'app/ng-class',
   'app/ng-style',
   'app/component-property-binding',
+  'app/event-binding',
   /** @cli-barrel */
 ];
 

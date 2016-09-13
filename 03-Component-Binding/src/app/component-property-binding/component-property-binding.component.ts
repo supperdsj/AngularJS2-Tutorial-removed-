@@ -15,7 +15,7 @@ export class ComponentPropertyBindingComponent implements OnInit {
   @Input() componentProperty: number = 0;
   constructor() {
     setInterval(() => {
-      console.log(this.componentProperty);
+      // console.log(this.componentProperty);
     }, 1000)
   }
   ngOnInit() {
